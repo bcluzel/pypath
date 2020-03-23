@@ -86,3 +86,7 @@ bool Field::delete_obstacle(Coordinates obstacle_position){
 int Field::get_number_of_obstacle(void){
     return (int)list_obsctacles.size();
 }
+
+std::vector<Rectangle> Field::get_list_of_obstacle(void){
+    return list_obsctacles;
+}

@@ -11,16 +11,17 @@ You will need g++ in order to install pypath-fpa!
 
 ## Avaliables constructors 
 
-Coordinates(x,y)
-Size(width,height)
-Rectangle(Coordinates,Size)
-Castar()
-Field()
-Field(int robot_diameter_mm)
-Field(int width_mm, int height_mm, int robot_diameter_mm)
+ - Coordinates(x,y)
+ - Size(width,height)
+ - Rectangle(Coordinates,Size)
+ - Castar()
+ - Field()
+ - Field(int robot_diameter_mm)
+ - Field(int width_mm, int height_mm, int robot_diameter_mm)
 
 ## Documentation
-TODO !
+
+Click [HERE](https://htmlpreview.github.io/?https://github.com/bcluzel/pypath/doc/index.html) !
 ## How to use
 
 Here is a simple example :
