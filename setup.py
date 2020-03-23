@@ -21,7 +21,7 @@ castar = Extension(module_name +".castar",
 
 setup(
     name=module_name + "-fpa", # change name for pypi not module
-    version='0.1.2',
+    version='0.1.3',
     description='Fast pathfinding algorithme',
     long_description=long_description,
     long_description_content_type='text/markdown',
