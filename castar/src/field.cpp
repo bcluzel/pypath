@@ -50,20 +50,20 @@ bool Field::is_possible(Coordinates robot_pos){
 }
 
 bool Field::intersect(Circle circle, Rectangle rect){
-    Coordinates circle_distance;
-    circle_distance.x = abs((int)circle.pos.x - (int)rect.pos.x);
-    circle_distance.y = abs((int)circle.pos.y - (int)rect.pos.y);
 
-    if (circle_distance.x > ((rect.dim.width + circle.diameter)/2)) { return false; }
-    if (circle_distance.y > ((rect.dim.height + circle.diameter)/2)) { return false; }
+    unsigned int circle_distance_x = abs((int)circle.pos.x - (int)rect.pos.x);
+    unsigned int circle_distance_y = abs((int)circle.pos.y - (int)rect.pos.y);
 
-    if (circle_distance.x <= (rect.dim.width/2)) { return true; } 
-    if (circle_distance.y <= (rect.dim.height/2)) { return true; }
+    if (circle_distance_x > ((rect.dim.width + circle.diameter)/2)) { return false; }
+    if (circle_distance_y > ((rect.dim.height + circle.diameter)/2)) { return false; }
 
-    unsigned int cornerDistance_sq = square(circle_distance.x - rect.dim.width/2) +
-                         square(circle_distance.y - rect.dim.height/2);
+    if (circle_distance_x <= (rect.dim.width/2)) { return true; } 
+    if (circle_distance_y <= (rect.dim.height/2)) { return true; }
 
-    return (cornerDistance_sq <= square((unsigned int)circle.diameter/2));
+    unsigned int corner_distance_sq = square(circle_distance_x - rect.dim.width/2) +
+                         square(circle_distance_y - rect.dim.height/2);
+
+    return (corner_distance_sq <= square(circle.diameter/2));
 }
 
 

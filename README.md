@@ -4,6 +4,11 @@ The goal of this project is to provide a fast and efficient python library that 
 
 This module was originally developed for EIRBOT the robotic club of the engineer school Enseirb-Matmeca(French school).
 
+
+## REQUIREMENTS 
+
+You will need g++ in order to install pypath-fpa!
+
 ## Avaliables constructors 
 
 Coordinates(x,y)
@@ -15,11 +20,10 @@ Field(int robot_diameter_mm)
 Field(int width_mm, int height_mm, int robot_diameter_mm)
 
 ## Documentation
-TODO
-
+TODO !
 ## How to use
 
-Here is an simple example :
+Here is a simple example :
 ```python
     field = Field(200)
     castar = Castar()

@@ -9,13 +9,19 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
+sources_files = []
+for r, d, f in os.walk(here + "/castar/src/"):
+    for file in f:
+        if '.cpp' in file:
+            sources_files.append(os.path.join(r, file))
+print(sources_files)
 castar = Extension(module_name +".castar",
                     include_dirs = [here + "/castar/src/", here + "/castar/src/pybind11"],
-                    sources=["castar/src/main.cpp", "castar/src/field.cpp", "castar/src/castar.cpp"])
+                    sources=sources_files)
 
 setup(
-    name=module_name,
-    version='0.1.0',
+    name=module_name + "-fpa", # change name for pypi not module
+    version='0.1.2',
     description='Fast pathfinding algorithme',
     long_description=long_description,
     long_description_content_type='text/markdown',
