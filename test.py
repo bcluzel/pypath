@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import unittest
-from castar import * 
+from pypath import * 
 
 class TestAstar(unittest.TestCase):
 
