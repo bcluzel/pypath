@@ -1,4 +1,4 @@
-# pypath : A* pathinding algorithme writed in C++ for python
+# pypath : A* pathfinding algorithm wrote in C++ for python
 
 The goal of this project is to provide a fast and efficient python library that can find a path given a list of obstacle.
 
