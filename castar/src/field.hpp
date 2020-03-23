@@ -24,8 +24,8 @@ class Size
             width=_width;
             height=_height;
         }
-    int width;
-    int height; 
+    unsigned int width;
+    unsigned int height; 
 };
 
 
@@ -37,7 +37,7 @@ class Circle{
             diameter = _diameter;
         }
     Coordinates pos;
-    int diameter;
+    unsigned int diameter;
 };
 
 class Rectangle{
@@ -71,6 +71,7 @@ public:
     bool delete_obstacle(Coordinates obstacle_position);
     bool is_possible(Coordinates robot_pos);
     bool intersect(Circle c, Rectangle r);
+    std::vector<Rectangle> get_list_of_obstacle(void);
     // TODO load_chunk();
 };
 

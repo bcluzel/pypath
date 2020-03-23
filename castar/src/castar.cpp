@@ -52,9 +52,9 @@ int Castar::find_path(Coordinates start, Coordinates end, Field field, std::vect
     std::vector<Node> close_list;
 
     int close_nodes[field_dim.width][field_dim.height];
-    for (int i = 0; i < field_dim.width; i++)
+    for (unsigned int i = 0; i < field_dim.width; i++)
     {
-        for (int j = 0; j < field_dim.height; j++)
+        for (unsigned int j = 0; j < field_dim.height; j++)
         {
             close_nodes[i][j] = 0;
         }
