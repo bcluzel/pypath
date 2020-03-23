@@ -21,7 +21,8 @@ You will need g++ in order to install pypath-fpa!
 
 ## Documentation
 
-Click [HERE](https://htmlpreview.github.io/?https://github.com/bcluzel/pypath/doc/index.html) !
+Click [HERE](https://htmlpreview.github.io/?https://github.com/bcluzel/pypath/blob/master/doc/index.html)!
+
 ## How to use
 
 Here is a simple example :
