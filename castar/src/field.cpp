@@ -63,7 +63,7 @@ bool Field::intersect(Circle circle, Rectangle rect){
     unsigned int cornerDistance_sq = square(circle_distance.x - rect.dim.width/2) +
                          square(circle_distance.y - rect.dim.height/2);
 
-    return (cornerDistance_sq <= square(circle.diameter/2));
+    return (cornerDistance_sq <= square((unsigned int)circle.diameter/2));
 }
 
 
