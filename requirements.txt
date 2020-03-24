@@ -3,3 +3,4 @@ wheel
 bump2version
 pybind11
 pdoc3
+twine
