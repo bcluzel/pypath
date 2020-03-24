@@ -61,13 +61,8 @@ int Castar::find_path(Coordinates start, Coordinates end, Field field, std::vect
     }
 
     // Convert Coordinates to nodes
-    Node start_node;
-    start_node.pos = start;
-    Node end_node;
-    end_node.pos = end;
-
-    start_node.g_cost = start_node.f_cost = start_node.h_cost = 0;
-    start_node.came_from = start_node.pos;
+    Node start_node = Node(start, start);
+    Node end_node(end);
     open_list.push_back(start_node);
     Node current;
     Node tmp;
@@ -77,7 +72,7 @@ int Castar::find_path(Coordinates start, Coordinates end, Field field, std::vect
         size_t x = 0;
         for (size_t i = 0; i < open_list.size(); i++)
         {
-            if (open_list[i].f_cost < tmp.f_cost)
+            if (open_list[i].f_cost <= tmp.f_cost)
             {
                 tmp = open_list[i];
                 x = i;
@@ -137,7 +132,9 @@ int Castar::find_path(Coordinates start, Coordinates end, Field field, std::vect
                         {
                             iter->f_cost = new_node.f_cost;
                             iter->g_cost = new_node.g_cost;
+                            iter->h_cost = new_node.h_cost;
                             iter->came_from = new_node.came_from;
+
                             replaced = 1;
                             break;
                         }

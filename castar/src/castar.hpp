@@ -1,5 +1,5 @@
 #ifndef H_CASTAR
-#define h_CASTAR
+#define H_CASTAR
 
 #include <sys/types.h>
 #include <vector>
@@ -8,13 +8,29 @@
 
 #define square(_a) ((_a)*(_a))
 
-struct Node
+class Node
 {
-    Coordinates pos;
-    Coordinates came_from;
-    float g_cost;
-    float h_cost;
-    float f_cost;
+    public:
+        Node(){
+            pos = Coordinates(0,0);
+            came_from = Coordinates(0,0);
+            g_cost = f_cost = h_cost = 0;
+        }
+        Node(Coordinates _pos){
+            pos= _pos;
+            came_from = Coordinates(0,0);
+            g_cost = f_cost = h_cost = 0;
+        }
+        Node(Coordinates _pos, Coordinates _came_from){
+            pos= _pos;
+            came_from = _came_from;
+            g_cost = f_cost = h_cost = 0;
+        }
+        Coordinates pos;
+        Coordinates came_from;
+        float g_cost;
+        float h_cost;
+        float f_cost;
 };
 
 class Castar
