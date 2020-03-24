@@ -1,3 +1,5 @@
 pybind11
 pdoc3
 bumpversion
+setuptools
+wheel
