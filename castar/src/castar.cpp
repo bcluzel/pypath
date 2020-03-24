@@ -61,13 +61,8 @@ int Castar::find_path(Coordinates start, Coordinates end, Field field, std::vect
     }
 
     // Convert Coordinates to nodes
-    Node start_node;
-    start_node.pos = start;
-    Node end_node;
-    end_node.pos = end;
-
-    start_node.g_cost = start_node.f_cost = start_node.h_cost = 0;
-    start_node.came_from = start_node.pos;
+    Node start_node = Node(start, start);
+    Node end_node(end);
     open_list.push_back(start_node);
     Node current;
     Node tmp;
@@ -77,7 +72,7 @@ int Castar::find_path(Coordinates start, Coordinates end, Field field, std::vect
         size_t x = 0;
         for (size_t i = 0; i < open_list.size(); i++)
         {
-            if (open_list[i].f_cost < tmp.f_cost)
+            if (open_list[i].f_cost <= tmp.f_cost)
             {
                 tmp = open_list[i];
                 x = i;
@@ -99,9 +94,7 @@ int Castar::find_path(Coordinates start, Coordinates end, Field field, std::vect
                 {
                     continue;
                 }
-                Node new_node;
-                new_node.pos.x = current.pos.x + x;
-                new_node.pos.y = current.pos.y + y;
+                Node new_node(Coordinates(current.pos.x + x, current.pos.y + y));
                 if (new_node.pos.x > (int)field_dim.width - 1 or
                     new_node.pos.x < 0 or
                     new_node.pos.y > (int)field_dim.height - 1 or
@@ -120,7 +113,6 @@ int Castar::find_path(Coordinates start, Coordinates end, Field field, std::vect
                     continue;
                 }
                 new_node.g_cost = current.g_cost + distance(new_node.pos, current.pos); // slower but the best path
-                //new_node.g_cost = current.g_cost + 1; // faster but not the most efficient path
                 new_node.h_cost = distance(new_node.pos, end_node.pos);
                 new_node.f_cost = new_node.h_cost + new_node.g_cost;
                 new_node.came_from = current.pos;
@@ -135,9 +127,7 @@ int Castar::find_path(Coordinates start, Coordinates end, Field field, std::vect
                         seen = 1;
                         if (iter->f_cost > new_node.f_cost)
                         {
-                            iter->f_cost = new_node.f_cost;
-                            iter->g_cost = new_node.g_cost;
-                            iter->came_from = new_node.came_from;
+                            *iter = new_node;
                             replaced = 1;
                             break;
                         }
@@ -207,14 +197,13 @@ int Castar::simplify_path(std::vector<Coordinates> path, std::vector<Coordinates
     return NO_ERROR;
 }
 
-int Castar::find_path_simplified(Coordinates start, Coordinates end, Field field, std::vector<Coordinates> *final_path){
+int Castar::find_path_simplified(Coordinates start, Coordinates end, Field field, std::vector<Coordinates> *final_path)
+{
     std::vector<Coordinates> path;
     int return_code = find_path(start, end, field, &path);
     simplify_path(path, final_path);
     return return_code;
 }
-
-
 
 float Castar::distance(Coordinates a, Coordinates b)
 {

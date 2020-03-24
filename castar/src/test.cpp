@@ -86,8 +86,8 @@ void test(void){
 
     vector<Coordinates> path;
     Coordinates start, end;
-    start = {10,10};
-    end = {290,160};
+    start = {120,40};
+    end = {218,142};
     auto t_start = chrono::high_resolution_clock::now(); 
     ios_base::sync_with_stdio(false); 
     astar.find_path(start,end, board , &path);
