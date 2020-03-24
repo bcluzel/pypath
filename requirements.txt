@@ -1,5 +1,5 @@
 setuptools
 wheel
-bumpversion
+bump2version
 pybind11
 pdoc3
