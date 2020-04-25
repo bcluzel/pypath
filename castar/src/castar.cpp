@@ -69,18 +69,18 @@ int Castar::find_path(Coordinates start, Coordinates end, Field field, std::vect
     Node current;
     while (!open_list.empty())
     {
-        size_t x = 0;
+        std::vector<Node>::iterator x;
         current = open_list.back();
         for (std::vector<Node>::iterator iter = open_list.begin(); iter != open_list.end(); ++iter)
             {
                 if (iter->f_cost <= current.f_cost)
                 {
                     current = *iter;
-                    x = iter - open_list.begin();
+                    x = iter;
                 }
             }
 
-        open_list.erase(open_list.begin() + x);
+        open_list.erase(x);
         if (current.pos.x == end_node.pos.x and current.pos.y == end_node.pos.y)
         {
             reconstruct_path(&close_list, final_path, current);
