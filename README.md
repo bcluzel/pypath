@@ -1,4 +1,5 @@
 # pypath : A* pathfinding algorithm wrote in C++ for python
+[![Build status](https://dev.azure.com/baptistecluzel0615/baptistecluzel/_apis/build/status/pypath)](https://dev.azure.com/baptistecluzel0615/baptistecluzel/_build/latest?definitionId=1)
 
 The goal of this project is to provide a fast and efficient python library that can find a path given a list of obstacle.
 
