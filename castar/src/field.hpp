@@ -62,8 +62,8 @@ private:
     // on fait une classe obstacle ?
 public:
     Field();
-    Field(unsigned int robot_diameter_mm);
-    Field(unsigned int width_mm, unsigned int height_mm, unsigned int robot_diameter_mm);
+    Field(unsigned int robot_diameter);
+    Field(unsigned int width, unsigned int height, unsigned int robot_diameter);
     ~Field();
     Size get_dimensions(void);
     int get_number_of_obstacle(void);

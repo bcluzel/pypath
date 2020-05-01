@@ -48,8 +48,8 @@ PYBIND11_MODULE(castar, m) {
     );
     py::class_<Field>(m, "Field", "Class representing the field where pathfinding will be computed\n Used to store obstacles")
     .def(py::init<>())
-    .def(py::init<const unsigned int>(), py::arg("robot_diameter_mm"))
-    .def(py::init<const unsigned int, const unsigned int, const unsigned int>(), py::arg("width_mm"), py::arg("height_mm"), py::arg("robot_diameter_mm"))
+    .def(py::init<const unsigned int>(), py::arg("robot_diameter"))
+    .def(py::init<const unsigned int, const unsigned int, const unsigned int>(), py::arg("width"), py::arg("height"), py::arg("robot_diameter"))
     .def("add_obstacle", &Field::add_obsctacle, py::arg("Rectangle"),"Add an obstacle to the field")
     .def("delete_obstacle", &Field::delete_obstacle, py::arg("Coordinates"), "Delete the first obstacle added at the given position")
     .def("get_list_of_obstacle", &Field::get_list_of_obstacle, "Return the list of obstacle")

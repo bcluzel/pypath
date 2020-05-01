@@ -6,8 +6,8 @@ Avaliables constructors:
     Rectangle(Coordinates,Size)
     Castar()
     Field()
-    Field(int robot_diameter_mm)
-    Field(int width_mm, int height_mm, int robot_diameter_mm)
+    Field(int robot_diameter)
+    Field(int width, int height, int robot_diameter)
 """
 from .castar import *
 
