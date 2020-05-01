@@ -11,20 +11,20 @@ Field::Field()
     robot.diameter = 20;
 }
 
-Field::Field(unsigned int robot_diameter_mm)
+Field::Field(unsigned int robot_diameter)
 {
     size.height = 200;
     size.width = 300;
     robot.pos.x = robot.pos.y = 0;
-    robot.diameter = robot_diameter_mm/10;
+    robot.diameter = robot_diameter;
 
 }
 
-Field::Field(unsigned int width_mm, unsigned int height_mm, unsigned int robot_diameter_mm){
-    size.height = height_mm/10;
-    size.width = width_mm/10;
+Field::Field(unsigned int width, unsigned int height, unsigned int robot_diameter){
+    size.height = height;
+    size.width = width;
     robot.pos.x = robot.pos.y = 0;
-    robot.diameter = robot_diameter_mm/10;
+    robot.diameter = robot_diameter;
 }
 
 

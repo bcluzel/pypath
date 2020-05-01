@@ -62,7 +62,7 @@ void board_visualize(Field board, std::vector<Coordinates> path){
 }
 
 void test(void){
-    Field board = Field(200);
+    Field board = Field(20);
     Castar astar = Castar();
     std::cout << "Launching !" << endl;
     Rectangle r;
