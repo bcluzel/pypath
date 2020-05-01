@@ -16,8 +16,8 @@ You will need g++ in order to install pypath-fpa!
  - Rectangle(Coordinates,Size)
  - Castar()
  - Field()
- - Field(int robot_diameter_mm)
- - Field(int width_mm, int height_mm, int robot_diameter_mm)
+ - Field(int robot_diameter)
+ - Field(int width, int height, int robot_diameter)
 
 ## Documentation
 
@@ -27,7 +27,7 @@ Click [HERE](https://htmlpreview.github.io/?https://github.com/bcluzel/pypath/bl
 
 Here is a simple example :
 ```python
-    field = Field(200)
+    field = Field(20)
     castar = Castar()
     field.add_obstacle(Rectangle(Coordinates(60,20), Size(2,40)))
     field.add_obstacle(Rectangle(Coordinates(150,40), Size(10,40)))
