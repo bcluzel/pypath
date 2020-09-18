@@ -94,13 +94,12 @@ void test(void){
     auto t_end = chrono::high_resolution_clock::now(); 
   
     // Calculating total time taken by the program. 
-    double time_taken = chrono::duration_cast<chrono::nanoseconds>(t_end - t_start).count(); 
+    double time_taken = chrono::duration_cast<chrono::microseconds>(t_end - t_start).count(); 
   
-    time_taken *= 1e-9; 
   
-    cout << "Time taken by program is : " << fixed  
-         << time_taken << setprecision(9); 
-    cout << " sec" << endl; 
     board_visualize(board, path);
+    cout << "Time took by the astar + simplify path is : " << fixed  
+         << time_taken *1e-3 << setprecision(9); 
+    cout << " ms" << endl; 
 
 }
