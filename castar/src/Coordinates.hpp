@@ -6,9 +6,7 @@ class Coordinates
 {
     public:
         Coordinates(){}
-        Coordinates(int _x, int _y){
-            x=_x;
-            y=_y;
+        Coordinates(int _x, int _y): x(_x), y(_y){
         }
         int x;
         int y; 
