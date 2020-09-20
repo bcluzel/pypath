@@ -117,7 +117,7 @@ void test(void){
 
     }
 
-    if (!nb_test){
+    if (nb_test){
         cout << "Mean time took by the astar + simplify path is : " << fixed  
             << sum_times/nb_test *1e-3 << setprecision(9); 
         cout << " ms" << endl; 
