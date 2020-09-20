@@ -2,19 +2,7 @@
 #define H_FIELD
 
 #include <vector>
-
-   
-class Coordinates
-{
-    public:
-        Coordinates(){}
-        Coordinates(int _x, int _y){
-            x=_x;
-            y=_y;
-        }
-        int x;
-        int y; 
-};
+#include "Coordinates.hpp"
 
 class Size
 {
@@ -58,8 +46,8 @@ class Field
 private:
     Size size;
     Circle robot;
-    std::vector<Rectangle> list_obsctacles; // TODO une deuxieme liste pour les cercles?
-    // on fait une classe obstacle ?
+    std::vector<Rectangle> list_obsctacles; 
+    // Need class obstacle qui agit defférement si c'est une node weight ou classique
 public:
     Field();
     Field(unsigned int robot_diameter);

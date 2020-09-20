@@ -4,7 +4,7 @@
 #include <queue>
 #include <algorithm>
 #include <list>
-
+#include "distance.hpp"
 
 Castar::Castar()
 {
@@ -73,7 +73,7 @@ int Castar::find_path(Coordinates start, Coordinates end, Field field, std::vect
         current = open_list.back();
         for (std::vector<Node>::iterator iter = open_list.begin(); iter != open_list.end(); ++iter)
             {
-                if (iter->f_cost <= current.f_cost)
+                if (iter->get_node_cost() <= current.get_node_cost())
                 {
                     current = *iter;
                     x = iter;
@@ -112,10 +112,7 @@ int Castar::find_path(Coordinates start, Coordinates end, Field field, std::vect
                 {
                     continue;
                 }
-                new_node.g_cost = current.g_cost + distance(new_node.pos, current.pos); // slower but the best path
-                new_node.h_cost = distance(new_node.pos, end_node.pos);
-                new_node.f_cost = new_node.h_cost + new_node.g_cost;
-                new_node.came_from = current.pos;
+                new_node.compute_cost(current, end_node.pos);
 
                 int replaced = 0;
                 int seen = 0;
@@ -125,7 +122,7 @@ int Castar::find_path(Coordinates start, Coordinates end, Field field, std::vect
                     if (iter->pos.x == new_node.pos.x and iter->pos.y == new_node.pos.y)
                     {
                         seen = 1;
-                        if (iter->f_cost > new_node.f_cost)
+                        if (iter->get_node_cost() > new_node.get_node_cost())
                         {
                             *iter = new_node;
                             replaced = 1;
@@ -203,9 +200,4 @@ int Castar::find_path_simplified(Coordinates start, Coordinates end, Field field
     int return_code = find_path(start, end, field, &path);
     simplify_path(path, final_path);
     return return_code;
-}
-
-float Castar::distance(Coordinates a, Coordinates b)
-{
-    return sqrt(square(a.x - b.x) + square(a.y - b.y));
 }
