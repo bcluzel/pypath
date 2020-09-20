@@ -62,6 +62,8 @@ void board_visualize(Field board, std::vector<Coordinates> path){
 }
 
 void test(void){
+
+    // INIT 
     Field board = Field(20);
     Castar astar = Castar();
     std::cout << "Launching !" << endl;
@@ -83,23 +85,47 @@ void test(void){
     r.dim.width = 200;
     board.add_obsctacle(r);
 
-
-    vector<Coordinates> path;
     Coordinates start, end;
     start = {120,40};
     end = {218,142};
-    auto t_start = chrono::high_resolution_clock::now(); 
-    ios_base::sync_with_stdio(false); 
-    astar.find_path(start,end, board , &path);
-    auto t_end = chrono::high_resolution_clock::now(); 
-  
-    // Calculating total time taken by the program. 
-    double time_taken = chrono::duration_cast<chrono::microseconds>(t_end - t_start).count(); 
-  
-  
-    board_visualize(board, path);
-    cout << "Time took by the astar + simplify path is : " << fixed  
-         << time_taken *1e-3 << setprecision(9); 
-    cout << " ms" << endl; 
+    vector<Coordinates> path;
 
+    const size_t nb_test = 10;
+    double sum_times = 0;
+    double min_time = 1000000000;
+    double max_time = -1000000000;
+    for (size_t i = 0; i < nb_test; i++)
+    {
+        path.clear();
+        auto t_start = chrono::high_resolution_clock::now(); 
+        ios_base::sync_with_stdio(false); 
+        astar.find_path(start,end, board , &path);
+        auto t_end = chrono::high_resolution_clock::now(); 
+    
+        // Calculating total time taken by the program. 
+        double time_taken = chrono::duration_cast<chrono::microseconds>(t_end - t_start).count(); 
+        sum_times += time_taken;
+        min_time = min(min_time, time_taken);
+        max_time = max(max_time, time_taken);
+
+        if (!i){
+            board_visualize(board, path);
+        }
+        cout << "Time took by the astar + simplify path is : " << fixed  
+            << time_taken *1e-3 << setprecision(9); 
+        cout << " ms" << endl; 
+
+    }
+
+    if (!nb_test){
+        cout << "Mean time took by the astar + simplify path is : " << fixed  
+            << sum_times/nb_test *1e-3 << setprecision(9); 
+        cout << " ms" << endl; 
+        cout << "Min : " << fixed  
+            << min_time *1e-3 << setprecision(9); 
+        cout << " ms" << endl; 
+        cout << "Max :" << fixed  
+            << max_time *1e-3 << setprecision(9); 
+        cout << " ms" << endl; 
+    }
 }
