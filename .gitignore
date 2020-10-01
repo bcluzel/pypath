@@ -9,6 +9,8 @@
 
 # Build
 
+bin
+!bin/.gitkeep
 build
 dist
 *.egg-info

@@ -72,13 +72,13 @@ int Castar::find_path(Coordinates start, Coordinates end, Field field, std::vect
         std::vector<Node>::iterator x;
         current = open_list.back();
         for (std::vector<Node>::iterator iter = open_list.begin(); iter != open_list.end(); ++iter)
+        {
+            if (iter->get_node_cost() <= current.get_node_cost())
             {
-                if (iter->get_node_cost() <= current.get_node_cost())
-                {
-                    current = *iter;
-                    x = iter;
-                }
+                current = *iter;
+                x = iter;
             }
+        }
 
         open_list.erase(x);
         if (current.pos.x == end_node.pos.x and current.pos.y == end_node.pos.y)
@@ -103,15 +103,16 @@ int Castar::find_path(Coordinates start, Coordinates end, Field field, std::vect
                     continue;
                 }
 
+                if (close_nodes[new_node.pos.x][new_node.pos.y])
+                {
+                    continue;
+                }
+
                 if (!field.is_possible(new_node.pos))
                 {
                     continue;
                 }
 
-                if (close_nodes[new_node.pos.x][new_node.pos.y])
-                {
-                    continue;
-                }
                 new_node.compute_cost(current, end_node.pos);
 
                 int replaced = 0;
@@ -128,6 +129,7 @@ int Castar::find_path(Coordinates start, Coordinates end, Field field, std::vect
                             replaced = 1;
                             break;
                         }
+                        break;
                     }
                 }
                 if (seen)
