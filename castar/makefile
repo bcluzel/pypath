@@ -1,6 +1,3 @@
-SUFFIX := $(shell python3-config --extension-suffix)
-PY_LIBS := $(shell python3 -m pybind11 --includes)
-
 TEST = no
 
 # project name (generate executable with this name)
@@ -16,6 +13,9 @@ ifeq ($(TEST),yes)
 	CFLAGS   = -O3 -Wall -Werror -g -std=c++11 -DTEST
 	LFLAGS   = -Wall
 else
+	SUFFIX := $(shell python3-config --extension-suffix)
+	PY_LIBS := $(shell python3 -m pybind11 --includes)
+
 	CFLAGS   = -O3 -Wall -Werror -shared -g -std=c++11 -fPIC $(PY_LIBS)
 	LFLAGS   = -Wall -shared -fPIC $(PY_LIBS)
 endif

@@ -1,10 +1,11 @@
 #include "castar.hpp"
-#include "math.h"
-#include "stdio.h"
+#include "distance.hpp"
+#include "debug.hpp"
+#include <math.h>
 #include <queue>
 #include <algorithm>
 #include <list>
-#include "distance.hpp"
+
 
 Castar::Castar()
 {
@@ -35,7 +36,7 @@ void Castar::reconstruct_path(std::vector<Node> *valid_paths, std::vector<Coordi
 
 int Castar::find_path(Coordinates start, Coordinates end, Field field, std::vector<Coordinates> *final_path)
 {
-
+    eprintf("Find path\n");
     Size field_dim = field.get_dimensions();
     if (start.x > (int)field_dim.width - 1 or
         start.x < 0 or
@@ -44,11 +45,14 @@ int Castar::find_path(Coordinates start, Coordinates end, Field field, std::vect
     {
         return ERR_ARGS_OUT_OF_RANGE;
     }
+    eprintf("Valid args\n");
 
     if (!field.is_possible(end))
     {
         return ERR_GOAL_IS_BLOCKED;
     }
+
+    eprintf("Goal is accesible\n");
 
     std::vector<Node> open_list;
     std::vector<Node> close_list;
@@ -67,8 +71,12 @@ int Castar::find_path(Coordinates start, Coordinates end, Field field, std::vect
     Node end_node(end);
     open_list.push_back(start_node);
     Node current;
+    eprintf("Start A*\n");
+
     while (!open_list.empty())
     {
+        eprintf("Size of open_list = %d \n", open_list.size());
+
         std::vector<Node>::iterator x;
         current = open_list.back();
         for (std::vector<Node>::iterator iter = open_list.begin(); iter != open_list.end(); ++iter)
@@ -81,20 +89,24 @@ int Castar::find_path(Coordinates start, Coordinates end, Field field, std::vect
         }
 
         open_list.erase(x);
+        eprintf("Chosen node x:%d| y:%d\n", current.pos.x, current.pos.y);
         if (current.pos.x == end_node.pos.x and current.pos.y == end_node.pos.y)
         {
             reconstruct_path(&close_list, final_path, current);
             return NO_ERROR;
         }
-        for (char x = -1; x <= 1; x++)
+        eprintf("List neighbours\n");
+        for (signed char x = -1; x <= 1; x++)
         {
-            for (char y = -1; y <= 1; y++)
+            for (signed char y = -1; y <= 1; y++)
             {
                 if (x == 0 and y == 0)
                 {
                     continue;
                 }
                 Node new_node(Coordinates(current.pos.x + x, current.pos.y + y));
+                eprintf("New neightbour node x:%d| y:%d\n", new_node.pos.x, new_node.pos.y);
+
                 if (new_node.pos.x > (int)field_dim.width - 1 or
                     new_node.pos.x < 0 or
                     new_node.pos.y > (int)field_dim.height - 1 or
@@ -102,14 +114,16 @@ int Castar::find_path(Coordinates start, Coordinates end, Field field, std::vect
                 {
                     continue;
                 }
-
+                eprintf("Node valid\n");
                 if (close_nodes[new_node.pos.x][new_node.pos.y])
                 {
+                    eprintf("Node is closed, skipping\n");
                     continue;
                 }
 
                 if (!field.is_possible(new_node.pos))
                 {
+                    eprintf("Node is on an obstacle or outside field, skipping\n");
                     continue;
                 }
 
